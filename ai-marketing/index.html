@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Headlight — Personalized AI Marketing Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-blue: #1a4a7a;
+      --brand-accent: #e8820c;
+    }
+    body { font-size: 1.05rem; }
+    .navbar { background-color: #f5f4ef !important; border-bottom: 2px solid #e0ddd5; }
+    .navbar-brand, .nav-link { color: #1a1a1a !important; }
+    .nav-link:hover { color: var(--brand-accent) !important; }
+    .section-header {
+      border-left: 5px solid var(--brand-accent);
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    section { padding: 3.5rem 0; }
+    section:nth-child(even) { background-color: #f8f9fa; }
+    .badge-email  { background-color: #0d6efd; }
+    .badge-text   { background-color: #198754; }
+    .message-card { border-left: 4px solid #dee2e6; margin-bottom: 1.5rem; }
+    .message-card.from-ai { border-left-color: var(--brand-accent); }
+    .discussion-item { counter-increment: discussion; }
+    .discussion-item::before { content: counter(discussion) ". "; font-weight: 700; color: var(--brand-accent); }
+    ol.discussion-list { list-style: none; counter-reset: discussion; padding-left: 0; }
+    ol.discussion-list li { margin-bottom: 1.25rem; font-size: 1.05rem; }
+    .hero-tagline { font-size: 1.25rem; color: #444; }
+    .concept-step { border: 1px solid #dee2e6; border-radius: 0.5rem; padding: 1.25rem; height: 100%; }
+    .concept-step .step-num { font-size: 2rem; font-weight: 800; color: var(--brand-accent); }
+    footer { background-color: var(--brand-blue); color: #ccc; font-size: 0.9rem; }
+    .glyph-btn { cursor: pointer; font-size: 0.8rem; padding: 0.25rem 0.6rem; vertical-align: middle; }
+    .note-card {
+      background: #fff8f0;
+      border: 1px solid var(--brand-accent);
+      border-radius: 0.5rem;
+      padding: 1.75rem;
+      font-family: Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.08);
+    }
+    #surveyBonus { display: none; }
+    #surveyBonus.visible { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-md sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#landing">
+      <span style="font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:.08em; color:var(--brand-blue);">HEADLIGHT</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-md-2">
+        <li class="nav-item"><a class="nav-link" href="#landing">Landing Page</a></li>
+        <li class="nav-item"><a class="nav-link" href="#persona">Persona</a></li>
+        <li class="nav-item"><a class="nav-link" href="#outreach">Outreach</a></li>
+        <li class="nav-item"><a class="nav-link" href="#survey">Survey</a></li>
+        <li class="nav-item"><a class="nav-link" href="#discussion">Discussion</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact Me</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- LANDING -->
+<section id="landing">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <p class="text-uppercase fw-semibold" style="color:var(--brand-accent); letter-spacing:.08em;">A Barely Viable Production</p>
+        <h1 class="fw-bold mb-3" style="color:var(--brand-blue);">Personalized<br>AI Marketing<br>for B2B</h1>
+        <p class="hero-tagline mb-4">What if every fleet owner in your pipeline got outreach built specifically for their business — not a campaign built for everyone?</p>
+        <p>Traditional B2B marketing sprays the same message at a list and waits for someone to raise their hand. The conversion rate reflects exactly how impersonal that feels.</p>
+        <p><strong>Personalized AI marketing takes three leaps forward:</strong></p>
+        <div class="row g-3 mt-1">
+          <div class="col-sm-4">
+            <div class="concept-step">
+              <div class="step-num">1</div>
+              <p class="fw-semibold mb-1">Identify Owner</p>
+              <p class="mb-2">AI profiles each prospect using business registrations, fleet data, and industry signals — before a single message is sent.</p>
+              <span class="badge bg-danger glyph-btn" data-bs-toggle="modal" data-bs-target="#modalProspectId">⛔ How this works</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="concept-step">
+              <div class="step-num">2</div>
+              <p class="fw-semibold mb-1">Leverage AI</p>
+              <p class="mb-0">Survey responses, page behavior, and engagement signals drive outreach that sounds written for this person specifically — not a segment.</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="concept-step">
+              <div class="step-num">3</div>
+              <p class="fw-semibold mb-1">Deliver Personally</p>
+              <p class="mb-0">Every follow-up — email, text, call — is generated on the fly. No templates. No spray and pray.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <div class="p-4 rounded border" style="border-color:var(--brand-blue) !important; background:#f0f4f8;">
+          <p style="font-family:'Bebas Neue',sans-serif; font-size:2.2rem; color:var(--brand-blue); letter-spacing:.06em; margin-bottom:0.25rem;">HEADLIGHT</p>
+          <p class="text-muted mb-3" style="font-size:0.9rem; letter-spacing:.04em;">ROUTE OPTIMIZATION &amp; FLEET VISIBILITY</p>
+          <p class="mb-3">Built for fleet owners who know their routes could be tighter — and want to finally see it, fix it, and grow past it.</p>
+          <p class="fw-semibold mb-0" style="color:var(--brand-accent);">20 vehicles. 3 locations. One owner ready to modernize what his father built.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONA -->
+<section id="persona">
+  <div class="container">
+    <h2 class="section-header fw-bold" style="color:var(--brand-blue);">Persona</h2>
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-7">
+        <h4 class="fw-semibold mb-1">Marcus Rivera</h4>
+        <p class="text-muted mb-3">Owner · Rivera Landscape Group · Chicago suburbs · 20 vehicles · 3 locations</p>
+
+        <h6 class="fw-bold text-uppercase mb-1" style="color:var(--brand-accent); letter-spacing:.06em;">Who He Is</h6>
+        <p>Marcus's father founded Rivera Landscape Group thirty years ago. Marcus grew up in it as a teenager — riding routes, learning the business — then drifted away in his twenties. He returned at 35 when his father's health began to fail. He didn't come back to be a caretaker. He came back to prove something.</p>
+
+        <h6 class="fw-bold text-uppercase mt-3 mb-1" style="color:var(--brand-accent); letter-spacing:.06em;">What He Believes</h6>
+        <ul>
+          <li>His routes cross more than they should. He sees it — a truck headed east passing one headed west on the same street.</li>
+          <li>He's leaving money on the table that he can't see clearly enough to pick up.</li>
+          <li>The business ran fine under his dad. Running fine isn't good enough anymore.</li>
+        </ul>
+
+        <h6 class="fw-bold text-uppercase mt-3 mb-1" style="color:var(--brand-accent); letter-spacing:.06em;">His Core Worry</h6>
+        <p>Marcus worries he's managing the business instead of growing it. Every week without a clear picture of route efficiency feels like margin he can't get back. He's not worried about the cost of a tool. He's worried about the cost of staying stuck.</p>
+
+        <h6 class="fw-bold text-uppercase mt-3 mb-1" style="color:var(--brand-accent); letter-spacing:.06em;">What Growth Means to Him</h6>
+        <p>Growth means taking what his father built — a real, durable business — and making it undeniably bigger and better. It means being the one who modernized it. It means his dad seeing it happen.</p>
+      </div>
+      <div class="col-lg-5">
+        <div class="card border-0 shadow-sm p-4">
+          <h6 class="fw-bold mb-3">At a Glance</h6>
+          <table class="table table-sm table-borderless mb-0">
+            <tbody>
+              <tr><td class="text-muted">Name</td><td><strong>Marcus Rivera</strong></td></tr>
+              <tr><td class="text-muted">Business</td><td>Rivera Landscape Group</td></tr>
+              <tr><td class="text-muted">Location</td><td>Chicago suburbs</td></tr>
+              <tr><td class="text-muted">Fleet</td><td>20 vehicles, 3 locations</td></tr>
+              <tr><td class="text-muted">Founded</td><td>By his father, 30 years ago</td></tr>
+              <tr><td class="text-muted">Marcus returned</td><td>Age 35, as father's health declined</td></tr>
+              <tr><td class="text-muted">Motivation</td><td>Growth — not caretaking</td></tr>
+              <tr><td class="text-muted">Core objection</td><td>"I already know my routes are off"</td></tr>
+              <tr><td class="text-muted">Budget</td><td>Not a gating factor</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTREACH -->
+<section id="outreach">
+  <div class="container">
+    <h2 class="section-header fw-bold" style="color:var(--brand-blue);">Outreach</h2>
+    <p class="text-muted mb-4">How Marcus enters the pipeline — and what the AI does after he raises his hand.</p>
+
+    <div class="row g-5 mb-5 align-items-start">
+      <div class="col-lg-6">
+        <h5 class="fw-semibold mb-3" style="color:var(--brand-blue);">Part A — The Package</h5>
+        <p>A lumpy envelope arrives at Marcus's office. Inside: a high-quality pickleball racket. No logo. No pitch. Just a handwritten note.</p>
+        <p>The gift has no connection to Headlight. That's the point — it earns 15 seconds of attention and a reciprocity trigger before a word about software is said.</p>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <span class="badge bg-danger glyph-btn" data-bs-toggle="modal" data-bs-target="#modalListBuilding">⛔ How the prospect list is built</span>
+          <span class="badge bg-danger glyph-btn" data-bs-toggle="modal" data-bs-target="#modalTimeLag">⛔ Time lag tracking</span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="note-card">
+          <p class="mb-3">Marcus —</p>
+          <p class="mb-3">Thought you might like this. If you haven't tried it out yet, give it a whirl or pass it to a friend who will enjoy it. It's a high quality racket.</p>
+          <p class="mb-4">If you get a moment, I'd love your feedback on a business concept we're developing for your industry. Quick three-question survey here.</p>
+          <p class="mb-1" style="font-family:'Bebas Neue',sans-serif; font-size:1.1rem; color:var(--brand-accent); letter-spacing:.04em;">→ headlightlandingpage.test</p>
+          <p class="mt-3 mb-0 text-muted" style="font-size:0.9rem;">— Chris Sciora</p>
+        </div>
+      </div>
+    </div>
+
+    <h5 class="fw-semibold mb-1" style="color:var(--brand-blue);">Part B — The AI Follow-Up Sequence</h5>
+    <p class="text-muted mb-4">After Marcus hits the page, the system takes over. Every message below is generated based on his survey responses and behavioral signals. <span class="badge bg-danger glyph-btn" data-bs-toggle="modal" data-bs-target="#modalAiGeneration">⛔ How AI generates these</span></p>
+
+    <!-- Message 1 -->
+    <div class="d-flex gap-3 mb-3">
+      <div class="flex-shrink-0 d-flex flex-column align-items-center text-center" style="width:64px;">
+        <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white" style="width:44px;height:44px;background:var(--brand-accent);font-size:1.1rem;">1</div>
+        <span class="mt-1" style="font-size:0.68rem;color:var(--brand-accent);font-weight:600;line-height:1.2;">Headlight AI</span>
+      </div>
+      <div class="flex-grow-1">
+        <div class="card message-card from-ai p-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="badge badge-email text-white">Email · Day 1</span>
+          </div>
+          <p class="fw-semibold mb-1">Subject: Thanks for checking this out, Marcus</p>
+          <p class="mb-0">Marcus — thanks for taking a few minutes. Based on what you shared, you already see the problem clearly. That's the hardest part. We built Headlight for owners exactly like you — who know something's off and need a tool that finally makes it visible and fixable. I'll follow up in a couple of days with something specific to landscaping fleets your size.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message 2 -->
+    <div class="d-flex gap-3 mb-3">
+      <div class="flex-shrink-0 d-flex flex-column align-items-center text-center" style="width:64px;">
+        <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white" style="width:44px;height:44px;background:var(--brand-accent);font-size:1.1rem;">2</div>
+        <span class="mt-1" style="font-size:0.68rem;color:var(--brand-accent);font-weight:600;line-height:1.2;">Headlight AI</span>
+      </div>
+      <div class="flex-grow-1">
+        <div class="card message-card from-ai p-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="badge badge-text text-white">Text · Day 2</span>
+          </div>
+          <p class="mb-0">Hey Marcus — Chris here. Noticed you started the survey but didn't finish. No pressure — just didn't want you to miss the last two questions. They're the ones most owners say hit closest to home. 30 seconds if you want to finish up.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message 3 -->
+    <div class="d-flex gap-3 mb-3">
+      <div class="flex-shrink-0 d-flex flex-column align-items-center text-center" style="width:64px;">
+        <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white" style="width:44px;height:44px;background:var(--brand-accent);font-size:1.1rem;">3</div>
+        <span class="mt-1" style="font-size:0.68rem;color:var(--brand-accent);font-weight:600;line-height:1.2;">Headlight AI</span>
+      </div>
+      <div class="flex-grow-1">
+        <div class="card message-card from-ai p-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="badge badge-email text-white">Email · Day 5</span>
+          </div>
+          <p class="fw-semibold mb-1">Subject: What 20-truck landscaping fleets typically find</p>
+          <p class="mb-0">Marcus — we looked at how fleets your size typically run. At 20 vehicles across 3 locations, the biggest efficiency gap is almost always cross-location overlap — trucks from different locations covering the same territory without a system to see it. Headlight shows that overlap on a map in real time and suggests how to redistribute stops. Most owners see the picture clearly in the first week and can't unsee it.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message 4 -->
+    <div class="d-flex gap-3 mb-3">
+      <div class="flex-shrink-0 d-flex flex-column align-items-center text-center" style="width:64px;">
+        <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white" style="width:44px;height:44px;background:var(--brand-accent);font-size:1.1rem;">4</div>
+        <span class="mt-1" style="font-size:0.68rem;color:var(--brand-accent);font-weight:600;line-height:1.2;">Headlight AI</span>
+      </div>
+      <div class="flex-grow-1">
+        <div class="card message-card from-ai p-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="badge badge-email text-white">Email · Day 10</span>
+          </div>
+          <p class="fw-semibold mb-1">Subject: Would a 15-minute look at your routes be useful?</p>
+          <p class="mb-0">Marcus — I won't keep nudging you. But I'd feel like I left something on the table if I didn't make this offer once: 15 minutes, your routes, no prep required. I'll show you what Headlight sees when it looks at a fleet your size — and you tell me if it's worth a longer conversation. If not, no hard feelings and I'll stop. If yes, we'll go from there.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SURVEY -->
+<section id="survey">
+  <div class="container">
+    <h2 class="section-header fw-bold" style="color:var(--brand-blue);">Survey</h2>
+    <p class="lead mb-1">Three questions. Two minutes.</p>
+    <p class="text-muted mb-4">Your answers shape how we follow up. The more you share, the more useful the conversation that follows.</p>
+
+    <!-- Q1 -->
+    <div class="card border-0 shadow-sm p-4 mb-4">
+      <h5 class="fw-semibold mb-2" style="color:var(--brand-blue);">Question 1 — Route Visibility</h5>
+      <p class="mb-3">Most fleet owners we talk to describe the same thing: a gut feeling that routes could be tighter, but no easy way to see it. When a driver calls out sick or a stop gets added last minute, it usually means someone's winging it. Sound familiar?</p>
+      <div class="mb-3">
+        <div class="form-check"><input class="form-check-input" type="radio" name="q1" id="q1a"><label class="form-check-label" for="q1a">This happens constantly</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="q1" id="q1b"><label class="form-check-label" for="q1b">Occasionally</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="q1" id="q1c"><label class="form-check-label" for="q1c">Rarely</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="q1" id="q1d"><label class="form-check-label" for="q1d">We have a system for this</label></div>
+      </div>
+      <label class="form-label text-muted small">Tell us more if you'd like — these answers are far more useful than the checkboxes.</label>
+      <textarea class="form-control" rows="2" placeholder="Optional — but genuinely valuable..."></textarea>
+    </div>
+
+    <!-- Q2 -->
+    <div class="card border-0 shadow-sm p-4 mb-4">
+      <h5 class="fw-semibold mb-2" style="color:var(--brand-blue);">Question 2 — Growth vs. Headcount</h5>
+      <p class="mb-3">When business grows, the instinct is to add a truck or hire a driver. But sometimes the capacity is already there — buried in inefficient routing. Have you ever wondered if you could handle more volume without adding overhead?</p>
+      <div class="mb-3">
+        <div class="form-check"><input class="form-check-input" type="radio" name="q2" id="q2a"><label class="form-check-label" for="q2a">Yes, frequently</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="q2" id="q2b"><label class="form-check-label" for="q2b">Sometimes</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="q2" id="q2c"><label class="form-check-label" for="q2c">We've already hit that ceiling</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="q2" id="q2d"><label class="form-check-label" for="q2d">Not really</label></div>
+      </div>
+      <label class="form-label text-muted small">Tell us more if you'd like — these answers are far more useful than the checkboxes.</label>
+      <textarea class="form-control" rows="2" placeholder="Optional — but genuinely valuable..."></textarea>
+    </div>
+
+    <!-- Q3 -->
+    <div class="card border-0 shadow-sm p-4 mb-4">
+      <h5 class="fw-semibold mb-2" style="color:var(--brand-blue);">Question 3 — Daily Operational Visibility</h5>
+      <p class="mb-3">On any given day, do you know roughly where your trucks are and how routes are progressing — or does clarity only come after the fact?</p>
+      <div class="mb-3">
+        <div class="form-check"><input class="form-check-input" type="radio" name="q3" id="q3a"><label class="form-check-label" for="q3a">Real-time visibility</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="q3" id="q3b"><label class="form-check-label" for="q3b">End-of-day only</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="q3" id="q3c"><label class="form-check-label" for="q3c">I find out when something goes wrong</label></div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="q3" id="q3d"><label class="form-check-label" for="q3d">We track this well</label></div>
+      </div>
+      <label class="form-label text-muted small">Tell us more if you'd like — these answers are far more useful than the checkboxes.</label>
+      <textarea class="form-control" rows="2" placeholder="Optional — but genuinely valuable..."></textarea>
+    </div>
+
+    <!-- Two more questions — shown after Q3 is answered -->
+    <div id="surveyBonus" class="mb-4">
+      <div class="p-4 rounded" style="background:#fdf6e3; border-left:5px solid var(--brand-accent);">
+        <h5 class="fw-bold mb-2" style="color:var(--brand-blue);">Want two more?</h5>
+        <p class="mb-3">You're finding this useful — we have a couple of additional questions if you'd like to keep going.</p>
+        <button class="btn btn-sm btn-outline-secondary me-2">Yes, show them</button>
+        <button class="btn btn-sm btn-link text-muted p-0">No thanks</button>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="d-flex align-items-center flex-wrap gap-3">
+      <button class="btn btn-secondary" disabled>Submit Survey</button>
+      <span class="badge bg-danger glyph-btn" data-bs-toggle="modal" data-bs-target="#modalSurveyCapture">⛔ What happens with your answers</span>
+      <span class="badge bg-danger glyph-btn" data-bs-toggle="modal" data-bs-target="#modalTimeLag">⛔ Time tracking</span>
+    </div>
+    <p class="text-muted small mt-2">Submit is disabled in this proof-of-concept. In production, responses trigger a personalized follow-up sequence within 24 hours.</p>
+  </div>
+</section>
+
+<!-- DISCUSSION -->
+<section id="discussion">
+  <div class="container">
+    <h2 class="section-header fw-bold" style="color:var(--brand-blue);">Discussion</h2>
+    <p class="text-muted mb-4">Open questions for reviewers of this proof-of-concept. No right answers — the goal is to surface your reactions and instincts.</p>
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <ol class="discussion-list">
+          <li class="discussion-item"><strong>Does the growth frame land differently than an efficiency pitch for this buyer?</strong> Most B2B software leads with ROI and cost savings. This page leads with legacy and ambition. Which resonates more — and why?</li>
+          <li class="discussion-item"><strong>Is the pickleball racket disconnect a strength or a liability in B2B?</strong> The gift has nothing to do with the product. That's intentional. Does it work in a business context, or does it feel out of place?</li>
+          <li class="discussion-item"><strong>At what point in the survey does it feel like a sales funnel vs. genuine research?</strong> Question 1 describes a shared problem. Question 2 hints that capacity might already exist. Where does Marcus shift from "they get me" to "they're selling me"?</li>
+          <li class="discussion-item"><strong>Would Marcus fill this out? What would make him stop?</strong> Be specific. What's the sentence, the question, the word that loses him?</li>
+          <li class="discussion-item"><strong>What's missing from the Marcus persona that would change the pitch?</strong> Industry, geography, and fleet size are here. What else matters — and what would you add?</li>
+          <li class="discussion-item"><strong>How does B2B AI personalization feel different from the B2C version?</strong> Compare this to the Jake &amp; Mia version at twodogplayground.com. What changes when the buyer is a business owner vs. a consumer?</li>
+        </ol>
+      </div>
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm p-4">
+          <h6 class="fw-bold mb-3">Facilitation Notes</h6>
+          <ul class="list-unstyled mb-0 small text-muted">
+            <li class="mb-2"><i class="bi bi-arrow-right-circle me-2"></i>No slides, no pitch — this is a conversation</li>
+            <li class="mb-2"><i class="bi bi-arrow-right-circle me-2"></i>All feedback is useful, including skepticism</li>
+            <li class="mb-2"><i class="bi bi-arrow-right-circle me-2"></i>Bring your own business context</li>
+            <li><i class="bi bi-arrow-right-circle me-2"></i>Questions don't need answers — they need better questions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="fw-semibold mt-5 mb-4" style="color:var(--brand-blue);">Simulated Reviewer Feedback</h4>
+    <p class="text-muted mb-4">Four archetypes. Each prompted to react honestly — not to be polite.</p>
+    <div class="row g-4 mb-5">
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <h6 class="fw-bold mb-0" style="color:var(--brand-accent);">Alternate Marcus</h6>
+          <p class="text-muted small mb-3">Fleet owner, 15 trucks, pest control, Phoenix</p>
+          <p class="mb-0 fst-italic">"The crossing routes thing is real but the way it's framed makes it sound like I don't know what I'm doing. I do know — I just can't fix it without the right tool. Lead with 'you already see the problem' not 'here's the problem you have.' Also the survey question about adding trucks vs. handling more volume — that one actually made me stop and think. That's the strongest question of the three."</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <h6 class="fw-bold mb-0" style="color:var(--brand-accent);">Alternate Chris</h6>
+          <p class="text-muted small mb-3">Direct response consultant, 20 years B2B</p>
+          <p class="mb-2 fst-italic">"The pickleball angle works but the note isn't doing enough work. 'I'd love your feedback on a business concept' is too vague — Marcus doesn't know what he's walking into. Give him one more sentence of context so he arrives curious, not suspicious. The growth frame is correct but it needs a sharper hook in the hero — 'modernize what your father built' is good copy but it's buried. That's your headline."</p>
+          <p class="mb-0 small text-muted"><strong>Personal note:</strong> This page needs to answer one question before anything else: is it here to demonstrate personalized AI marketing as a concept, or is it an MVP to sell Headlight? It's the latter. Keep that distinction visible during every iteration — scope creep toward the former will kill the conversion focus.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <h6 class="fw-bold mb-0" style="color:var(--brand-accent);">Smart Generalist</h6>
+          <p class="text-muted small mb-3">SMB owner, marketing agency, no fleet experience</p>
+          <p class="mb-0 fst-italic">"I understood what the page was trying to show me but I couldn't figure out what Headlight actually does until halfway through. The concept of personalized AI marketing came through clearly — the product behind it didn't. If the point is to show B2B AI marketing in action, you need one sentence early that grounds me in the actual business problem being solved, otherwise I'm just watching a demo of a demo."</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <h6 class="fw-bold mb-0" style="color:var(--brand-accent);">Committed Skeptic</h6>
+          <p class="text-muted small mb-3">Fleet owner, 8 trucks, landscaping, hasn't changed software in 12 years</p>
+          <p class="mb-0 fst-italic">"I'd throw the racket in the closet and never hit the page. But if I did — and this is the only useful thing I'll tell you — the survey would lose me on question two. 'Handle more volume without adding overhead' sounds like a pitch, not a question. I'd answer question one because it's about something I actually complain about. Question two feels like you're already selling me something and I haven't agreed to be sold yet."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-2 p-4 rounded" style="background:#fdf6e3; border-left:5px solid var(--brand-accent);">
+      <h5 class="fw-bold mb-3" style="color:var(--brand-blue);">Behind the Curtain</h5>
+      <p>Every element of this page — Marcus Rivera's persona, the outreach sequence, the survey questions — was developed through a structured strategy session. The marketing principles are human: thirty years of direct response, interruption marketing, and B2B sales psychology. Claude Code accelerated the production. The thinking behind it is mine.</p>
+      <p class="mb-0">This page exists to sell Headlight, not to demonstrate a technology. That distinction matters during every iteration. — Chris Sciora</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-header fw-bold" style="color:var(--brand-blue);">Contact Me</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <h5 class="fw-bold mb-3">Chris Sciora</h5>
+        <table class="table table-borderless table-sm">
+          <tbody>
+            <tr>
+              <td class="text-muted" style="width:120px"><i class="bi bi-envelope me-2"></i>Email</td>
+              <td><a href="mailto:chris@gomobileiq.com">chris@gomobileiq.com</a></td>
+            </tr>
+            <tr>
+              <td class="text-muted"><i class="bi bi-linkedin me-2"></i>LinkedIn</td>
+              <td><a href="https://www.linkedin.com/in/csciora/" target="_blank">linkedin.com/in/csciora</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-3 text-center">
+  <div class="container">
+    <span>Personalized 1-to-1 AI Marketing &mdash; B2B Demo &mdash; Headlight Route Optimization</span>
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal fade" id="modalProspectId" tabindex="-1">
+  <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header text-white" style="background:var(--brand-blue);">
+      <h5 class="modal-title">⛔ Implementation Detail: Prospect Identification</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <p>In production, prospect identification works as follows:</p>
+      <ul>
+        <li>Fleet owner data sourced from industry associations, fleet registration records, LinkedIn, and business credit databases</li>
+        <li>Each prospect scored on fleet size, geographic density, years in operation, and presence/absence of known route software</li>
+        <li>Marcus appears on this list because he fits the target profile: 15+ vehicles, Chicago metro, landscaping, no known routing tool in use</li>
+      </ul>
+      <p class="mb-0 text-muted small">This scoring and list-building infrastructure does not exist in this proof-of-concept.</p>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalListBuilding" tabindex="-1">
+  <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header text-white" style="background:var(--brand-blue);">
+      <h5 class="modal-title">⛔ Implementation Detail: Prospect List Building</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <p>In production, the mailing list is compiled from:</p>
+      <ul>
+        <li>Landscaping industry associations and trade directories</li>
+        <li>Fleet registration data (15+ vehicles, Chicago metro)</li>
+        <li>LinkedIn enrichment for owner identity and tenure</li>
+        <li>Business credit signals for company health and growth indicators</li>
+      </ul>
+      <p>Each package is addressed to the owner by name and shipped to the business address on record via a fulfillment partner — no manual handling.</p>
+      <p class="mb-0 text-muted small">This list and fulfillment infrastructure does not exist in this proof-of-concept.</p>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalTimeLag" tabindex="-1">
+  <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header text-white" style="background:var(--brand-blue);">
+      <h5 class="modal-title">⛔ Implementation Detail: Time Lag Tracking</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <p>In production, the system tracks three timestamps:</p>
+      <ul>
+        <li><strong>Mail drop date</strong> — when the package was sent to Marcus's address</li>
+        <li><strong>Page hit timestamp</strong> — when Marcus first visited this URL</li>
+        <li><strong>Survey completion or abandonment</strong> — which questions were answered and when</li>
+      </ul>
+      <p>The gap between drop date and page visit is a strong buying-intent signal. Same-day = interrupted something and acted immediately. Three weeks later = it sat on his desk and he came back — also a strong signal, different in kind.</p>
+      <p class="mb-0 text-muted small">This tracking infrastructure does not exist in this proof-of-concept.</p>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalAiGeneration" tabindex="-1">
+  <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header text-white" style="background:var(--brand-blue);">
+      <h5 class="modal-title">⛔ Implementation Detail: AI-Generated Messages</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <p>In production, every message in this sequence is generated by AI based on:</p>
+      <ul>
+        <li>Marcus's survey responses — checkbox selections and open-text answers</li>
+        <li>Page behavior — time on page, sections visited, where he abandoned the survey</li>
+        <li>Prospect profile — fleet size, industry, location, years in business</li>
+        <li>Time lag signals — when he hit the page relative to the mail drop</li>
+      </ul>
+      <p>No message is a template. Each is written fresh at time of sending. The AI is instructed to stay in the growth frame — never pitch cost savings, always pitch visibility and scale.</p>
+      <p class="mb-0 text-muted small">The AI generation infrastructure does not exist in this proof-of-concept. Messages shown are illustrative.</p>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalSurveyCapture" tabindex="-1">
+  <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header text-white" style="background:var(--brand-blue);">
+      <h5 class="modal-title">⛔ Implementation Detail: Survey Data Capture</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+    <div class="modal-body">
+      <p>In production, survey submission triggers:</p>
+      <ul>
+        <li>Responses stored in CRM, linked to Marcus's prospect record</li>
+        <li>AI scores responses for buying intent and routes to the appropriate follow-up sequence</li>
+        <li>Open-text answers are the highest-value input — used to generate hyper-personalized outreach copy</li>
+        <li>Follow-up sequence initiates within 24 hours of submission</li>
+        <li>Partial completions (abandonment after Q1 or Q2) trigger a separate, softer nudge sequence</li>
+      </ul>
+      <p class="mb-0 text-muted small">This CRM and automation infrastructure does not exist in this proof-of-concept.</p>
+    </div>
+  </div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Show "two more questions" only after Q3 option is selected
+  document.querySelectorAll('input[name="q3"]').forEach(input => {
+    input.addEventListener('change', () => {
+      document.getElementById('surveyBonus').style.display = 'block';
+    });
+  });
+</script>
+</body>
+</html>
